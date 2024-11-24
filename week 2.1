@@ -1,0 +1,24 @@
+ import java.util.Scanner;
+
+public class SequenceGeneratorWithSpaces {
+    // Method to generate the sequence recursively with spaces
+    public static String generateSequence(int n) {
+        // Base case for the first term
+        if (n == 1) {
+            return "1";
+        }
+        // Recursively generate the previous term, then concatenate the current number (n) with spaces
+        String previousTerm = generateSequence(n - 1);
+        return previousTerm + " " + n + " " + previousTerm;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        
+        // Output
+        System.out.println(generateSequence(n));
+        
+        scanner.close();
+    }
+}

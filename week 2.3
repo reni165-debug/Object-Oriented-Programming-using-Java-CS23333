@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class MoviePrediction {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int actingPower = sc.nextInt();
+        int criticRating = sc.nextInt();
+
+        // Predict the movie result
+        if (actingPower < 2 || criticRating < 2) {
+            System.out.println("No");  // Movie is a flop
+        } else if (actingPower > 8 || criticRating > 8) {
+            System.out.println("Yes");  // Movie is a hit
+        } else {
+            System.out.println("Maybe");  // Movie is average
+        }
+        
+        sc.close();
+    }
+}

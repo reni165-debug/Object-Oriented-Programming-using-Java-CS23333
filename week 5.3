@@ -1,0 +1,70 @@
+class BankAccount {
+    protected String accountNumber;
+    protected double balance;
+
+    // Constructor to initialize account number and balance
+    public BankAccount(String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposit $" + (int)amount + " into account " + accountNumber+":");
+            System.out.println("New balance after depositing $" + (int)amount + ": $" + balance);
+        } else {
+            System.out.println("Deposit amount must be positive.");
+        }
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdraw $" + (int)amount + " from account " + accountNumber+":");
+            System.out.println("New balance after withdrawing $" + (int)amount + ": $" + balance);
+        } else {
+            System.out.println("Insufficient balance for withdrawal.");
+        }
+    }
+}
+
+// SavingsAccount class that overrides the withdraw method
+class SavingsAccount extends BankAccount {
+    private static final double MIN_BALANCE = 100.0;
+
+    // Constructor for SavingsAccount
+    public SavingsAccount(String accountNumber, double balance) {
+        super(accountNumber, balance);
+    }
+
+    // Overridden withdraw method to enforce minimum balance
+    @Override
+    public void withdraw(double amount) {
+        System.out.println("Try to withdraw $" + (int)amount + " from " + accountNumber + "!");
+        if (balance - amount >= MIN_BALANCE) {
+            super.withdraw(amount);
+        } else {
+            System.out.println("Minimum balance of $100 required!");
+            System.out.println("Balance after trying to withdraw $" + (int)amount + ": $" + balance);
+        }
+    }
+}
+
+// Testing the classes
+public class Main {
+    public static void main(String[] args) {
+        // Creating a BankAccount object
+        BankAccount ba = new BankAccount("BA1234", 500);
+        System.out.println("Create a Bank Account object (A/c No. BA1234) with initial balance of $500:");
+        ba.deposit(1000);
+        ba.withdraw(600);
+       
+        // Creating a SavingsAccount object
+        SavingsAccount sa = new SavingsAccount("SA1000", 300);
+        System.out.println("Create a SavingsAccount object (A/c No. SA1000) with initial balance of $300:");
+        sa.withdraw(250);
+    }
+}
